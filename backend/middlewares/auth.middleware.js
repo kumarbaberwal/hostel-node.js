@@ -6,7 +6,7 @@ export const auth = async (req, res, next) => {
     try {
         const token = req.headers["authorization"];
 
-        if(!token){
+        if (!token) {
             return res.status(401).json({
                 sucess: false,
                 message: "Unauthorized - No Token Provided"
@@ -15,7 +15,7 @@ export const auth = async (req, res, next) => {
 
         const decoded = jwt.verify(token.split(" ")[1], ENV_VARS.JWT_SECRET);
 
-        if(!decoded){
+        if (!decoded) {
             return res.status(401).json({
                 sucess: false,
                 message: "Unauthorized - Invalid Token"
@@ -24,7 +24,7 @@ export const auth = async (req, res, next) => {
 
         const user = await User.findById(decoded.userId).select("-password");
 
-        if(!user){
+        if (!user) {
             return res.status(404).json({
                 sucess: false,
                 message: "User Not Found"
