@@ -1,6 +1,6 @@
 import express from 'express';
 import { ENV_VARS } from './config/env.config.js';
-
+import { connectDB } from './config/database.config.js';
 
 const app = express();
 app.use(express.json());
@@ -15,4 +15,5 @@ app.use('/', (req, res)=>{
 
 app.listen(PORT, ()=>{
     console.log("Server started at http://localhost:" + PORT);
+    connectDB();
 });
