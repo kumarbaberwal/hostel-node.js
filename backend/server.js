@@ -1,9 +1,11 @@
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import { ENV_VARS } from './config/env.config.js';
 import { connectDB } from './config/database.config.js';
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 const PORT = ENV_VARS.PORT;
 
