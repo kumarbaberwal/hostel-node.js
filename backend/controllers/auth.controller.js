@@ -123,3 +123,37 @@ export async function login(req, res) {
         });
     }
 }
+
+
+export async function logout(req, res) {
+    try {
+        res.clearCookies("jwt-hostel");
+        res.status(200).json({
+            success: true,
+            message: "Logout successfully"
+        });
+    } catch (error) {
+        console.log("Error in logout controller: " + error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+}
+
+
+export async function authCheck(req, res) {
+    try {
+        console.log("req.user", req.user);
+        res.status(200).json({
+            success: true,
+            user: req.user
+        });
+    } catch (error) {
+        console.log("Error in authChechController: " + error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+}
