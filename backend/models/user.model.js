@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema({
         require: true,
     },
     phoneNumber: {
-        type: String,
+        type: Number,
         required: true
     },
     blockNumber: {
@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     roomNumber: {
-        type: String,
+        type: Number,
         required: true
     },
     role: {

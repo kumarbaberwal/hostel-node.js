@@ -1,6 +1,6 @@
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
-import { generateTokenAndSetCookie } from "../utils/generateToken";
+import { generateTokenAndSetCookie } from "../utils/generateToken.js";
 
 export async function signup(req, res) {
     try {
@@ -78,7 +78,7 @@ export async function signup(req, res) {
 
 export async function login(req, res) {
     try {
-        const { email, password } = req.param;
+        const { email, password } = req.body;
 
         if(!email || !password) {
             return res.status(400).json({
@@ -127,7 +127,7 @@ export async function login(req, res) {
 
 export async function logout(req, res) {
     try {
-        res.clearCookies("jwt-hostel");
+        res.clearCookie("jwt-hostel");
         res.status(200).json({
             success: true,
             message: "Logout successfully"
