@@ -1,0 +1,50 @@
+[
+    {
+        "currentCapacity": 0,
+        "roomCharges": 84000,
+        "roomNumber": 201,
+        "roomStatus": "Available",
+        "roomType": "AC",
+        "totalCapacity": 4
+    },
+    {
+        "currentCapacity": 0,
+        "roomCharges": 73000,
+        "roomNumber": 101,
+        "roomStatus": "Available",
+        "roomType": "Standard",
+        "totalCapacity": 4
+    },
+    {
+        "currentCapacity": 0,
+        "roomCharges": 130000,
+        "roomNumber": 103,
+        "roomStatus": "Available",
+        "roomType": "AC",
+        "totalCapacity": 2
+    },
+    {
+        "currentCapacity": 0,
+        "roomCharges": 9500,
+        "roomNumber": 103,
+        "roomStatus": "Available",
+        "roomType": "AC",
+        "totalCapacity": 3
+    },
+    {
+        "currentCapacity": 0,
+        "roomCharges": 100000,
+        "roomNumber": 203,
+        "roomStatus": "Available",
+        "roomType": "Standard",
+        "totalCapacity": 2
+    },
+    {
+        "currentCapacity": 0,
+        "roomCharges": 84000,
+        "roomNumber": 202,
+        "roomStatus": "Available",
+        "roomType": "Standard",
+        "totalCapacity": 3
+    }
+]
