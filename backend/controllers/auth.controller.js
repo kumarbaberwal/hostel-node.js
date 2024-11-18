@@ -1,12 +1,13 @@
 import { User } from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
 import { generateTokenAndSetCookie } from "../utils/generateToken.js";
+import { Rooms } from '../models/room.model.js';
 
 export async function signup(req, res) {
     try {
-        const { userName, firstName, lastName, email, password, phoneNumber, blockNumber, roomNumber } = req.body;
+        const { userName, firstName, lastName, email, password, phoneNumber, roomNumber } = req.body;
 
-        const requiredFields = ["userName", "firstName", "lastName", "email", "password", "phoneNumber", "blockNumber", "roomNumber"];
+        const requiredFields = ["userName", "firstName", "lastName", "email", "password", "phoneNumber", "roomNumber"];
         const missingFields = requiredFields.filter(field => !req.body[field]);
 
         if (missingFields.length > 0) {
@@ -50,9 +51,29 @@ export async function signup(req, res) {
             email,
             password: hashedPassword,
             phoneNumber,
-            blockNumber,
             roomNumber,
         });
+
+        // Update room capacity
+        const room = await Rooms.findOne({ roomNumber });
+        if (!room) {
+            return res.status(400).json({
+                success: false,
+                message: "Room not found"
+            });
+        }
+
+        room.currentCapacity += 1;
+        if (room.currentCapacity > room.totalCapacity) {
+            return res.status(400).json({
+                success: false,
+                message: "Room is fully occupied"
+            });
+        }
+        if (room.currentCapacity === room.totalCapacity) {
+            room.roomStatus = "Occupied";
+        }
+        await room.save();
 
         const token = generateTokenAndSetCookie(newUser._id, res);
 

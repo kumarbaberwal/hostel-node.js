@@ -4,6 +4,7 @@ import { ENV_VARS } from './config/env.config.js';
 import { connectDB } from './config/database.config.js';
 import authRoutes  from './routes/auth.route.js';
 import roomRoutes  from './routes/room.route.js';
+import { auth } from './middlewares/auth.middleware.js';
 
 const app = express();
 app.use(express.json());
@@ -18,7 +19,7 @@ const PORT = ENV_VARS.PORT;
 // });
 
 app.use("/auth", authRoutes);
-app.use("/rooms", roomRoutes);
+app.use("/rooms", auth, roomRoutes);
 
 app.listen(PORT, ()=>{
     console.log("Server started at http://localhost:" + PORT);

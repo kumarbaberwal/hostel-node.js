@@ -27,10 +27,6 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    blockNumber: {
-        type: String,
-        required: true
-    },
     roomNumber: {
         type: Number,
         required: true

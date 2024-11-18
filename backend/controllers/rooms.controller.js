@@ -25,3 +25,39 @@ export async function getAvailableRooms(req, res) {
         });
     }
 }
+
+
+export async function updateRoom(req, res) {
+    const { roomId } = req.body;
+    try {
+
+        const room = await Rooms.findById(roomId);
+
+        if(!room){
+            return res.status(400).json({
+                success: false,
+                message: "Room NOT Found"
+            });
+        }
+
+        room.currentCapacity += 1;
+
+        if(room.currentCapacity >= room.totalCapacity){
+            room.roomStatus = "Occupied";
+        }
+
+        await room.save();
+
+        res.status(200).json({
+            success: true,
+            room
+        });
+        
+    } catch (error) {
+        console.log("Error in rooms controller: " + error.message);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+}
