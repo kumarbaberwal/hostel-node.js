@@ -33,7 +33,7 @@ export async function updateRoom(req, res) {
 
         const room = await Rooms.findById(roomId);
 
-        if(!room){
+        if (!room) {
             return res.status(400).json({
                 success: false,
                 message: "Room NOT Found"
@@ -42,7 +42,7 @@ export async function updateRoom(req, res) {
 
         room.currentCapacity += 1;
 
-        if(room.currentCapacity >= room.totalCapacity){
+        if (room.currentCapacity >= room.totalCapacity) {
             room.roomStatus = "Occupied";
         }
 
@@ -52,7 +52,7 @@ export async function updateRoom(req, res) {
             success: true,
             room
         });
-        
+
     } catch (error) {
         console.log("Error in rooms controller: " + error.message);
         res.status(500).json({
